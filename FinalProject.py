@@ -5,6 +5,11 @@ import json
 TOKEN = ''
 LIMIT = 200
 
+# Создаем файл с заголовком
+with open('row_data_kinopoisk.csv', mode='w+', newline='', encoding='utf-8') as file:
+    fieldnames = ['id', 'title', 'genres', 'countries', 'rating_kp', 'rating imdb', 'votes imdb', 'year']
+    csv.DictWriter(file, fieldnames=fieldnames)
+        
 # Парсер сайта
 def simple_parser(token, next_page=None):
     '''
@@ -35,10 +40,6 @@ def simple_parser(token, next_page=None):
     data = response_bytes.decode('utf-8')
 
     res = json.loads(data)
-    # Создаем файл с заголовком
-    with open('row_data_kinopoisk.csv', mode='w+', newline='', encoding='utf-8') as file:
-        fieldnames = ['id', 'title', 'genres', 'countries', 'rating_kp', 'rating imdb', 'votes imdb', 'year']
-        csv.DictWriter(file, fieldnames=fieldnames)
 
     # После каждого прохода функции дополняем файл полученными строками
     with open('row_data_kinopoisk.csv', mode='a+', newline='', encoding='utf-8') as file:
