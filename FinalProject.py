@@ -1,5 +1,3 @@
-# TODO: Функция в итоге возвращает > 30к записей, но строки повторяются. Предположу, что необходимо в каждом проходе менять год. В целом работает
-
 import http.client
 import csv
 import json
@@ -26,10 +24,10 @@ def simple_parser(token, next_page=None):
     headers = { 'X-API-KEY': token}
     # Проверка наличия следующей страницы
     if not next_page:
-        pars_string = f'/v1.5/movie?year=2021&movieLength=60-250&isSeries=false&&budget.value=1000000-1000000000&year=2010-2020&limit=250'
+        pars_string = f'/v1.5/movie?year=2021&movieLength=60-250&isSeries=false&&budget.value=1000000-1000000000&limit=250'
 
     else:
-        pars_string = f'/v1.5/movie?year=2021&movieLength=60-250&isSeries=false&&budget.value=1000000-1000000000&year=2010-2020&limit=250&next={next_page}'
+        pars_string = f'/v1.5/movie?year=2000-2020&movieLength=60-250&isSeries=false&&budget.value=1000000-1000000000&limit=250&next={next_page}'
 
     conn.request("GET", pars_string, headers=headers)
     response = conn.getresponse()
